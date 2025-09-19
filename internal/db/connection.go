@@ -28,5 +28,8 @@ func Connect(cfg config.DatabaseConfig) *sql.DB {
 		log.Fatalf("Unable to connect to database: %v\n", err)
 	}
 
+	// Run migrations after successful connection
+	RunMigrations(dsn)
+
 	return db
 }
