@@ -1,0 +1,7 @@
+info:
+  contact: {}
+  description: An authentication API
+  title: Authentication API
+  version: "1.0"
+paths: {}
+swagger: "2.0"
