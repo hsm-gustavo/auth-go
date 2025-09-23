@@ -10,7 +10,10 @@ import (
 	"github.com/go-chi/cors"
 
 	_ "github.com/hsm-gustavo/auth-go/docs"
+	"github.com/hsm-gustavo/auth-go/internal/api/auth"
 	"github.com/hsm-gustavo/auth-go/internal/api/health"
+	"github.com/hsm-gustavo/auth-go/internal/api/user"
+	"github.com/hsm-gustavo/auth-go/internal/config"
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
@@ -35,12 +38,34 @@ func SetupRoutes(db *sql.DB) http.Handler {
 	r.Use(middleware.StripSlashes)
 	r.Use(middleware.Timeout(2 * time.Minute))
 
-	// cfg := config.GetConfig()
+	cfg := config.Load()
 
 	// init services & handlers
+	userHandler := user.NewHandler(db)
+	authHandler := auth.NewAuthHandler(cfg.JWTSecret, db)
+
 	r.Get("/health", health.HealthHandler)
 
-	// init middleware if any
+	// public auth routes
+	r.Post("/auth/register", authHandler.Register)
+	r.Post("/auth/login", authHandler.Login)
+	r.Post("/auth/refresh", authHandler.Refresh)
+
+	// protected auth routes
+	r.Group(func(r chi.Router) {
+		r.Use(authHandler.AuthMiddleware)
+		r.Get("/auth/me", authHandler.Me)
+		
+		// Admin-only routes
+		r.Group(func(r chi.Router) {
+			r.Use(authHandler.AdminMiddleware)
+			r.Get("/auth/admin", authHandler.Admin)
+		})
+	})
+
+	r.Post("/users", userHandler.CreateUser)
+	r.Get("/users", userHandler.GetUserByEmail)
+	r.Get("/users/{id}/roles", userHandler.GetUserRoles)
 
 	// init swagger
 	r.Get("/docs", func(w http.ResponseWriter, r *http.Request) {

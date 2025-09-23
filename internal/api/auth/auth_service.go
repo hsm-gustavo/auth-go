@@ -14,9 +14,9 @@ import (
 )
 
 type AuthService struct {
-	UserService 	*user.UserService
-	JWTSecret		[]byte
-	TTL				time.Duration
+	UserService *user.UserService
+	JWTSecret   []byte
+	TTL         time.Duration
 }
 
 func (s *AuthService) HashPassword(password string) (string, error) {
@@ -32,12 +32,12 @@ func (s *AuthService) GenerateJWT(userID uuid.UUID, roles []string) (string, err
 	now := time.Now()
 	claims := db.Claims{
 		UserID: userID,
-		Roles: roles,
+		Roles:  roles,
 		RegisteredClaims: jwt.RegisteredClaims{
-			IssuedAt: jwt.NewNumericDate(now),
+			IssuedAt:  jwt.NewNumericDate(now),
 			ExpiresAt: jwt.NewNumericDate(now.Add(s.TTL)),
-			Issuer: "auth-go",
-			Subject: userID.String(),
+			Issuer:    "auth-go",
+			Subject:   userID.String(),
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
