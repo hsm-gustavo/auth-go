@@ -13,7 +13,7 @@ import (
 func Connect(cfg config.DatabaseConfig) *sql.DB {
 	// refer to https://github.com/go-sql-driver/mysql/?tab=readme-ov-file#dsn-data-source-name
 	//mysql://user:pass@host:port/name?parseTime=true
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?parseTime=true", cfg.User, cfg.Password, cfg.Host, cfg.Port,cfg.Name)
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?parseTime=true", cfg.User, cfg.Password, cfg.Host, cfg.Port, cfg.Name)
 
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {

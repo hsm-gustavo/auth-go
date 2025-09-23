@@ -15,9 +15,9 @@ import (
 	"github.com/hsm-gustavo/auth-go/internal/db"
 )
 
-// @title Authentication API
-// @version 1.0
-// @description An authentication API
+// @title			Authentication API
+// @version		1.0
+// @description	An authentication API
 func main() {
 	cfg := config.Load()
 
@@ -30,8 +30,8 @@ func main() {
 	// End routes
 
 	server := &http.Server{
-		Addr: fmt.Sprintf(":%d", cfg.Server.Port),
-		Handler: router,
+		Addr:         fmt.Sprintf(":%d", cfg.Server.Port),
+		Handler:      router,
 		ReadTimeout:  15 * time.Second,
 		WriteTimeout: 15 * time.Second,
 		IdleTimeout:  60 * time.Second,
@@ -50,10 +50,10 @@ func main() {
 	// channel to capture quit signals (e.g. CTRL+C)
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
-	<- quit
+	<-quit
 
 	log.Println("Shutting down the server...")
-	ctx, cancel := context.WithTimeout(context.Background(), 10 * time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	if err := server.Shutdown(ctx); err != nil {

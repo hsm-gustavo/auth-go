@@ -9,7 +9,7 @@ import (
 )
 
 type Config struct {
-	Server 	  ServerConfig
+	Server    ServerConfig
 	Database  DatabaseConfig
 	JWTSecret string
 }
@@ -19,18 +19,18 @@ type ServerConfig struct {
 }
 
 type DatabaseConfig struct {
-	Host 	 string
-	Port 	 int
-	User 	 string
+	Host     string
+	Port     int
+	User     string
 	Password string
-	Name 	 string
+	Name     string
 }
 
 func Load() *Config {
 	err := godotenv.Load(".env")
 
-	if err != nil{
-  		log.Fatalf("Error loading .env file: %s", err)
+	if err != nil {
+		log.Fatalf("Error loading .env file: %s", err)
 	}
 
 	serverPort, _ := strconv.Atoi(getEnv("SERVER_PORT", "8080"))
@@ -41,9 +41,9 @@ func Load() *Config {
 			Port: serverPort,
 		},
 		Database: DatabaseConfig{
-			Host: 	  getEnv("DB_HOST", "localhost"),
-			Port: 	  dbPort,
-			User: 	  getEnv("DB_USER", "gouser"),
+			Host:     getEnv("DB_HOST", "localhost"),
+			Port:     dbPort,
+			User:     getEnv("DB_USER", "gouser"),
 			Password: getEnv("DB_PASSWORD", "gopass"),
 			Name:     getEnv("DB_NAME", "godb"),
 		},
