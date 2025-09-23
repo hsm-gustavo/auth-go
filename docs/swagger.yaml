@@ -1,7 +1,41 @@
+basePath: /
+host: localhost:8080
 info:
-  contact: {}
-  description: An authentication API
+  contact:
+    email: support@example.com
+    name: API Support
+  description: An authentication API for user management
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
   title: Authentication API
   version: "1.0"
-paths: {}
+paths:
+  /health:
+    get:
+      consumes:
+      - application/json
+      description: Check if the API is running and healthy
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: API is healthy
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Health check endpoint
+      tags:
+      - health
+schemes:
+- http
+- https
 swagger: "2.0"

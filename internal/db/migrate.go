@@ -17,7 +17,7 @@ func RunMigrations(dsn string) {
 	}
 
 	m, err := migrate.New(
-		"file://" + migrationsPath,
+		"file://"+migrationsPath,
 		"mysql://"+dsn,
 	)
 	if err != nil {

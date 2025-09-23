@@ -10,6 +10,7 @@ import (
 	"github.com/go-chi/cors"
 
 	_ "github.com/hsm-gustavo/auth-go/docs"
+	"github.com/hsm-gustavo/auth-go/internal/api/health"
 	httpSwagger "github.com/swaggo/http-swagger"
 )
 
@@ -37,6 +38,7 @@ func SetupRoutes(db *sql.DB) http.Handler {
 	// cfg := config.GetConfig()
 
 	// init services & handlers
+	r.Get("/health", health.HealthHandler)
 
 	// init middleware if any
 

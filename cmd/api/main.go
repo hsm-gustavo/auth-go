@@ -16,8 +16,16 @@ import (
 )
 
 // @title			Authentication API
-// @version		1.0
-// @description	An authentication API
+// @version			1.0
+// @description		An authentication API for user management
+// @termsOfService	http://swagger.io/terms/
+// @contact.name	API Support
+// @contact.email	support@example.com
+// @license.name	MIT
+// @license.url		https://opensource.org/licenses/MIT
+// @host			localhost:8080
+// @BasePath		/
+// @schemes			http https
 func main() {
 	cfg := config.Load()
 
