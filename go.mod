@@ -1,6 +1,8 @@
 module github.com/hsm-gustavo/auth-go
 
-go 1.24
+go 1.24.0
+
+toolchain go1.24.7
 
 require (
 	github.com/go-chi/chi/v5 v5.2.3
@@ -12,6 +14,7 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/swaggo/http-swagger v1.3.4
 	github.com/swaggo/swag v1.16.6
+	golang.org/x/crypto v0.42.0
 )
 
 require (
@@ -27,7 +30,7 @@ require (
 	github.com/mailru/easyjson v0.7.6 // indirect
 	github.com/swaggo/files v0.0.0-20220610200504-28940afbdbfe // indirect
 	golang.org/x/mod v0.21.0 // indirect
-	golang.org/x/net v0.38.0 // indirect
+	golang.org/x/net v0.43.0 // indirect
 	golang.org/x/sync v0.12.0 // indirect
 	golang.org/x/tools v0.24.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
